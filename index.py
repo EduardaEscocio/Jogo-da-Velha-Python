@@ -3,7 +3,7 @@ sorteio = random.randint(1,2)
 humano = 'X'
 computador = 'O'
 tabuleiro = [[0,0,0], [0,0,0], [0,0,0]]
-def 
+
 def imprimir_tabuleiro(tabuleiro):
     
     for i in range(3):
