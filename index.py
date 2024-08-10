@@ -2,9 +2,53 @@ import random
 sorteio = random.randint(1,2)
 humano = 'X'
 computador = '\033[0;31mO\033[m'
+jogador = input('Insira o seu nome: ')
+tabuleiro = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 
-tabuleiro = [[0,0,0], [0,0,0], [0,0,0]]
+def verificar_vertical():
+    vencedor = ' '
+    for i in range(2):
+        if tabuleiro[0][i] == tabuleiro[1][i] and tabuleiro[1][i] == tabuleiro[2][i] and tabuleiro[0][i] == tabuleiro[2][i] and tabuleiro[0][i] != ' ':
+            vencedor = tabuleiro[0][i]
+        if vencedor == 'X':
+            print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
+        else:
+            print(f'\033[0;32mO computador ganhou \033[m')
+            return True
+    return False
+def verificar_horizontal():
+    vencedor = ' '
+    for i in range(2):
+        if tabuleiro[i][0] == tabuleiro[i][1] == tabuleiro[i][2] != ' ':
+            vencedor = tabuleiro[i][0]
+        if vencedor == 'X':
+            print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
+                
+        else:
+            print(f'\033[0;32mO computador ganhou \033[m')
+            return True
+    return False
+    
 
+def verificar_diagonal():
+    vencedor = ' '
+    if tabuleiro[0][0] == tabuleiro[1][1] == tabuleiro[2][2] != ' ':
+        vencedor = tabuleiro[0][0]
+        if vencedor == 'X':
+            print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
+        else:
+            print(f'\033[0;32mO computador ganhou \033[m')
+        return True
+
+    if tabuleiro[2][0] == tabuleiro[1][1] == tabuleiro[0][2] != ' ':
+        vencedor = tabuleiro[2][0]
+        if vencedor == 'X':
+            print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
+        else:
+            print(f'\033[0;32mO computador ganhou \033[m')
+        return True
+    return False
+    
 def imprimir_tabuleiro(tabuleiro):
     
     for i in range(3):
@@ -17,40 +61,53 @@ def checar_casa_human(tabuleiro):
         linha_human = int(input('Escolha a linha para jogar: '))
         
         coluna_human = int(input('Escolha a coluna para jogar: '))
-        if tabuleiro[linha_human][coluna_human] == 0:
+        if tabuleiro[linha_human][coluna_human] == ' ':
             tabuleiro[linha_human][coluna_human] = 'X'
 
         else:
             print(f'A casa de linha: {linha_human} e coluna: {coluna_human} está ocupada, escolha outra')
+            checar_casa_human(tabuleiro=tabuleiro)
         break
 
 def checar_casa_comp(tabuleiro):
     while True:
         linha_comp = random.randint(0,2)
         coluna_comp = random.randint(0,2)
-        if tabuleiro[linha_comp][coluna_comp] == 0:
+        if tabuleiro[linha_comp][coluna_comp] == ' ':
             tabuleiro[linha_comp][coluna_comp] = computador
+        else: 
+            print(f'A casa de linha {linha_comp} e coluna {coluna_comp} escolhida pelo computador já está ocupada, ele irá jogar novamente!.')
+            checar_casa_comp(tabuleiro=tabuleiro)
         break
       
-
 while True:
     imprimir_tabuleiro(tabuleiro=tabuleiro)
     print(' ')
     print('=*' * 40)
     print(' ')
     if sorteio == 1:
+        print('O computador começou jogando')
         checar_casa_comp(tabuleiro=tabuleiro)
-        print('=*' * 40)
-        print(' ')
-
+        
+        # verificar_vertical()
+        # verificar_horizontal()
+   
         imprimir_tabuleiro(tabuleiro=tabuleiro)
         print('=*' * 40)
         print(' ')
 
         checar_casa_human(tabuleiro=tabuleiro)
+        
+        # verificar_vertical()
+        # verificar_horizontal()
 
     elif sorteio == 2:
+        print('Você começou jogando')
         checar_casa_human(tabuleiro=tabuleiro)
+        
+        # verificar_vertical()
+        # verificar_horizontal()
+
         print('=*' * 40)
         print(' ')
 
@@ -59,7 +116,12 @@ while True:
         print(' ')
 
         checar_casa_comp(tabuleiro=tabuleiro)
-
+        
+        # verificar_vertical()
+        # verificar_horizontal()
+    if verificar_horizontal() == True or verificar_vertical() == True or verificar_diagonal() == True:
+        imprimir_tabuleiro(tabuleiro=tabuleiro)
+        break
 # def escolher_jog(sorteio):
 #     if sorteio == 1:
 #         checar_casa_comp()
