@@ -19,33 +19,34 @@ def verificar_vertical():
 def verificar_horizontal():
     vencedor = ' '
     for i in range(2):
-        if tabuleiro[i][0] == tabuleiro[i][1] == tabuleiro[i][2] != ' ':
+        if tabuleiro[i][0] == tabuleiro[i][1] and tabuleiro[i][1] == tabuleiro[i][2] and tabuleiro[i][2] == tabuleiro[i][0] and tabuleiro[i][0] != ' ':    
             vencedor = tabuleiro[i][0]
         if vencedor == 'X':
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
                 
         else:
-            print(f'\033[0;32mO computador ganhou \033[m')
+            print(f'\033[0;32mO computador ganhou 3 \033[m')
             return True
     return False
     
 
 def verificar_diagonal():
     vencedor = ' '
-    if tabuleiro[0][0] == tabuleiro[1][1] == tabuleiro[2][2] != ' ':
+    if tabuleiro[0][0] == tabuleiro[1][1] and tabuleiro[1][1] == tabuleiro[2][2] and tabuleiro[2][2] == tabuleiro[0][0] and tabuleiro[0][0] != ' ':
         vencedor = tabuleiro[0][0]
         if vencedor == 'X':
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
         else:
-            print(f'\033[0;32mO computador ganhou \033[m')
+            print(f'\033[0;32mO computador ganhou 2 \033[m')
         return True
 
-    if tabuleiro[2][0] == tabuleiro[1][1] == tabuleiro[0][2] != ' ':
+    if tabuleiro[2][0] == tabuleiro[1][1] and tabuleiro[1][1] == tabuleiro[0][2] and tabuleiro[0][2] == tabuleiro[2][0] and tabuleiro[2][0] != ' ':
+
         vencedor = tabuleiro[2][0]
         if vencedor == 'X':
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
         else:
-            print(f'\033[0;32mO computador ganhou \033[m')
+            print(f'\033[0;32mO computador ganhou 1 \033[m')
         return True
     return False
     
