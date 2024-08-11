@@ -66,15 +66,30 @@ def checar_casa_human(tabuleiro):
     while True:
         linha_human = int(input('Escolha a linha para jogar: '))
         if linha_human > 2:
-            
-        coluna_human = int(input('Escolha a coluna para jogar: '))
-        if tabuleiro[linha_human][coluna_human] == ' ':
-            tabuleiro[linha_human][coluna_human] = 'X'
-        
+            print('Linha inválida')
+            linha_human = None
+            checar_casa_human(tabuleiro)
+
         else:
-            print(f'A casa de linha: {linha_human} e coluna: {coluna_human} está ocupada, escolha outra')
-            checar_casa_human(tabuleiro=tabuleiro)
+            coluna_human = int(input('Escolha a coluna para jogar: '))
+            if coluna_human > 2:
+                print('Coluna invalida')
+                coluna_human = None
+                checar_casa_human(tabuleiro)
+            if tabuleiro[linha_human][coluna_human] == ' ':
+                tabuleiro[linha_human][coluna_human] = 'X'
+        
+            else:
+                print(f'A casa de linha: {linha_human} e coluna: {coluna_human} está ocupada, escolha outra')
+                checar_casa_human(tabuleiro=tabuleiro)
         break
+
+# def checar_casa_human():
+#     while True:
+#         if tabuleiro[checarlinhah][checarcolunah] == ' ':
+#             tabuleiro[checarlinhah][checarcolunah] == 'X'
+#         else:
+#             print('Casa inválida')
 
 def checar_casa_comp(tabuleiro):
     while True:
@@ -88,8 +103,6 @@ def checar_casa_comp(tabuleiro):
             checar_casa_comp(tabuleiro=tabuleiro)
         break
 
-# def placar():
-    # if verificar_diagonal() == True or verificar_horizontal() == True or verificar_vertical() == True:
         
 
 # AVISAR AO PLAYER QUEM INICIOU A PARTIDA
@@ -115,14 +128,16 @@ while True:
         print(' ')
 
         checar_casa_human(tabuleiro=tabuleiro)
-        
+        # checarlinhah(tabuleiro)
+        # checarcolunah(tabuleiro)
         # verificar_vertical()
         # verificar_horizontal()
 
     elif sorteio == 2:
         
         checar_casa_human(tabuleiro=tabuleiro)
-        
+        # checarlinhah(tabuleiro)
+        # checarcolunah(tabuleiro)
         # verificar_vertical()
         # verificar_horizontal()
 
@@ -152,4 +167,21 @@ while True:
 #     if sorteio == 1:
 #         checar_casa_comp()
 #     else:
+# def checarlinhah(tabuleiro):
+#     while True:
+#         linha_human = int(input('Escolha a linha para jogar: '))
+#         if linha_human > 2:
+#              print('Linha inválida')
+#              checarlinhah(tabuleiro)
+#         else:
+#             return linha_human
+# def checarcolunah(tabuleiro):
+#     while True:
+#         coluna_human = int(input('Escolha a coluna para jogar: '))
+#         if coluna_human > 2:
+#             print('Coluna inválida')
+#             checarcolunah(tabuleiro)
+#         else:
+#             if tabuleiro[checarlinhah(tabuleiro)][coluna_human] == ' ':
+#                 tabuleiro[checarlinhah(tabuleiro)][coluna_human] == 'X'
 #         checar_casa_human()
