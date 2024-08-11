@@ -53,7 +53,11 @@ def verificar_diagonal():
             print(f'\033[0;32mO computador ganhou 1 \033[m')
             return vencedor
     
-    
+def verificar_velha():
+    for i in range(2):
+        for j in range(2):
+            if tabuleiro[i][j] != ' ':
+
 def imprimir_tabuleiro(tabuleiro):
     print('\033[0;94m  1   2   3\033[m')
     print()
@@ -158,11 +162,15 @@ while True:
         imprimir_tabuleiro(tabuleiro=tabuleiro)
         print('Obrigada por jogar!')
         break
-    if verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
+    elif verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
         placar_O += 1
         print(f'Jogador: {placar_X} Computador: {placar_O}')
         imprimir_tabuleiro(tabuleiro=tabuleiro)
         break
+    else:
+        if verificar_velha() == True:
+            print('Deu velha')
+            break
 # def escolher_jog(sorteio):
 #     if sorteio == 1:
 #         checar_casa_comp()
