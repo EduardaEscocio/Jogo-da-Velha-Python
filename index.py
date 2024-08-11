@@ -55,24 +55,24 @@ def verificar_diagonal():
     
     
 def imprimir_tabuleiro(tabuleiro):
-    print('\033[0;94m  0   1   2\033[m')
+    print('\033[0;94m  1   2   3\033[m')
     print()
     for i in range(3):
-        print(f'{f'\033[0;94m{i}\033[m'} '  f'{tabuleiro[i][0]} | {tabuleiro[i][1]} | {tabuleiro[i][2]} ')
+        print(f'{f'\033[0;94m{i+1}\033[m'} '  f'{tabuleiro[i][0]} | {tabuleiro[i][1]} | {tabuleiro[i][2]} ')
         if i < 2:
             print(' ---+---+---')
 
 def checar_casa_human(tabuleiro):
     while True:
-        linha_human = int(input('Escolha a linha para jogar: '))
-        if linha_human > 2:
+        linha_human = int(input('Escolha a linha para jogar: ') ) - 1 
+        if linha_human > 2 or linha_human == -1:
             print('Linha inválida')
             linha_human = None
             checar_casa_human(tabuleiro)
 
         else:
-            coluna_human = int(input('Escolha a coluna para jogar: '))
-            if coluna_human > 2:
+            coluna_human = int(input('Escolha a coluna para jogar: ') ) - 1
+            if coluna_human > 2 or coluna_human == -1:
                 print('Coluna invalida')
                 coluna_human = None
                 checar_casa_human(tabuleiro)
@@ -80,7 +80,7 @@ def checar_casa_human(tabuleiro):
                 tabuleiro[linha_human][coluna_human] = 'X'
         
             else:
-                print(f'A casa de linha: {linha_human} e coluna: {coluna_human} está ocupada, escolha outra')
+                print(f'A casa de linha: {linha_human+1} e coluna: {coluna_human+1} está ocupada, escolha outra')
                 checar_casa_human(tabuleiro=tabuleiro)
         break
 
@@ -97,7 +97,7 @@ def checar_casa_comp(tabuleiro):
         coluna_comp = random.randint(0,2)
         if tabuleiro[linha_comp][coluna_comp] == ' ':
             tabuleiro[linha_comp][coluna_comp] = computador
-            print(f'O computador jogou na casa de linha {linha_comp} e coluna {coluna_comp}')
+            print(f'O computador jogou na casa de linha {linha_comp+1} e coluna {coluna_comp+1}')
         else: 
             print(f'A casa de linha {linha_comp} e coluna {coluna_comp} escolhida pelo computador já está ocupada, ele irá jogar novamente!.')
             checar_casa_comp(tabuleiro=tabuleiro)
