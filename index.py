@@ -12,10 +12,10 @@ def verificar_vertical():
             vencedor = tabuleiro[0][i]
         if vencedor == 'X':
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
+            return True
         if vencedor == computador:
             print(f'\033[0;32mO computador ganhou \033[m')
             return True
-    return False
 def verificar_horizontal():
     vencedor = ' '
     for i in range(2):
@@ -28,7 +28,6 @@ def verificar_horizontal():
         if vencedor == computador:
             print(f'\033[0;32mO computador ganhou 3 \033[m')
             return True
-    return False
     
 
 def verificar_diagonal():
@@ -50,7 +49,7 @@ def verificar_diagonal():
         if vencedor == computador:
             print(f'\033[0;32mO computador ganhou 1 \033[m')
             return True
-    return False
+    
     
 def imprimir_tabuleiro(tabuleiro):
     
