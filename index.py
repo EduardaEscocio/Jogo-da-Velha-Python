@@ -12,7 +12,7 @@ def verificar_vertical():
             vencedor = tabuleiro[0][i]
         if vencedor == 'X':
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
-        else:
+        if vencedor == computador:
             print(f'\033[0;32mO computador ganhou \033[m')
             return True
     return False
@@ -23,8 +23,9 @@ def verificar_horizontal():
             vencedor = tabuleiro[i][0]
         if vencedor == 'X':
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
+            return True
                 
-        else:
+        if vencedor == computador:
             print(f'\033[0;32mO computador ganhou 3 \033[m')
             return True
     return False
@@ -36,18 +37,19 @@ def verificar_diagonal():
         vencedor = tabuleiro[0][0]
         if vencedor == 'X':
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
-        else:
+            return True
+        if vencedor == computador:
             print(f'\033[0;32mO computador ganhou 2 \033[m')
-        return True
-
+            return True
     if tabuleiro[2][0] == tabuleiro[1][1] and tabuleiro[1][1] == tabuleiro[0][2] and tabuleiro[0][2] == tabuleiro[2][0] and tabuleiro[2][0] != ' ':
 
         vencedor = tabuleiro[2][0]
         if vencedor == 'X':
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
-        else:
+            return True
+        if vencedor == computador:
             print(f'\033[0;32mO computador ganhou 1 \033[m')
-        return True
+            return True
     return False
     
 def imprimir_tabuleiro(tabuleiro):
@@ -121,6 +123,7 @@ while True:
         # verificar_vertical()
         # verificar_horizontal()
     if verificar_horizontal() == True or verificar_vertical() == True or verificar_diagonal() == True:
+        print('win')
         imprimir_tabuleiro(tabuleiro=tabuleiro)
         break
 # def escolher_jog(sorteio):
