@@ -96,7 +96,7 @@ def verificar_horizontal():
             return vencedor
                 
         if vencedor == computador:
-            print(f'\033[0;32mO computador ganhou 3 \033[m')
+            print(f'\033[0;32mO computador ganhou \033[m')
             return vencedor
     
 def verificar_diagonal():
@@ -108,7 +108,7 @@ def verificar_diagonal():
             return vencedor
             
         if vencedor == computador:
-            print(f'\033[0;32mO computador ganhou 2 \033[m')
+            print(f'\033[0;32mO computador ganhou  \033[m')
             return vencedor
     if tabuleiro[2][0] == tabuleiro[1][1] and tabuleiro[1][1] == tabuleiro[0][2] and tabuleiro[0][2] == tabuleiro[2][0] and tabuleiro[2][0] != ' ':
 
@@ -117,7 +117,7 @@ def verificar_diagonal():
             print(f'\033[0;32mO jogador {jogador} ganhou \033[m')
             return vencedor
         if vencedor == computador:
-            print(f'\033[0;32mO computador ganhou 1 \033[m')
+            print(f'\033[0;32mO computador ganhou \033[m')
             return vencedor
     
 
@@ -142,21 +142,21 @@ def main():
             checar_casa_computador(tabuleiro=tabuleiro)
             jogadas += 1
             if verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
-                placar_O += 1
-                print(f'Jogador: {placar_X} Computador: {placar_O}')
+    
                 imprimir_tabuleiro(tabuleiro=tabuleiro)
                 break
             imprimir_tabuleiro(tabuleiro=tabuleiro)
             print('=*' * 40)
             print(' ')
+
+            #DEFINIR QUANDO SERÁ EMPATE
             if jogadas > 8:
-                print('Deu velha')
+                print('Deu velha :( )')
                 break
             checar_casa_human(tabuleiro=tabuleiro)
             jogadas += 1
             if verificar_horizontal() == 'X' or verificar_vertical() == 'X' or verificar_diagonal() == 'X':
-                placar_X += 1
-                print(f'Jogador: {placar_X} Computador: {placar_O}')
+               
                 imprimir_tabuleiro(tabuleiro=tabuleiro)
                 break
 
@@ -166,8 +166,7 @@ def main():
             checar_casa_human(tabuleiro=tabuleiro)
             jogadas += 1
             if verificar_horizontal() == 'X' or verificar_vertical() == 'X' or verificar_diagonal() == 'X':
-                placar_X += 1
-                print(f'Jogador: {placar_X} Computador: {placar_O}')
+                
                 imprimir_tabuleiro(tabuleiro=tabuleiro)
                 break
             
@@ -177,14 +176,14 @@ def main():
             imprimir_tabuleiro(tabuleiro=tabuleiro)
             print('=*' * 40)
             print(' ')
+            #DEFINIR QUANDO SERÁ EMPATE
             if jogadas > 8:
-                print('Deu velha')
+                print('Deu velha :()')
                 break
             checar_casa_computador(tabuleiro=tabuleiro)
             jogadas += 1
             if verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
-                placar_O += 1
-                print(f'Jogador: {placar_X} Computador: {placar_O}')
+                
                 imprimir_tabuleiro(tabuleiro=tabuleiro)
                 break
         
