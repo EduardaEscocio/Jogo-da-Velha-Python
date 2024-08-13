@@ -6,6 +6,7 @@ jogador = input('Insira o seu nome: ')
 tabuleiro = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 placar_X = 0
 placar_O = 0
+count = 0
 
 def verificar_vertical():
     vencedor = ' '
@@ -18,6 +19,7 @@ def verificar_vertical():
         if vencedor == computador:
             print(f'\033[0;32mO computador ganhou \033[m')
             return vencedor
+        
 def verificar_horizontal():
     vencedor = ' '
     for i in range(2):
@@ -31,7 +33,6 @@ def verificar_horizontal():
             print(f'\033[0;32mO computador ganhou 3 \033[m')
             return vencedor
     
-
 def verificar_diagonal():
     vencedor = ' '
     if tabuleiro[0][0] == tabuleiro[1][1] and tabuleiro[1][1] == tabuleiro[2][2] and tabuleiro[2][2] == tabuleiro[0][0] and tabuleiro[0][0] != ' ':
@@ -53,11 +54,6 @@ def verificar_diagonal():
             print(f'\033[0;32mO computador ganhou 1 \033[m')
             return vencedor
     
-# def verificar_velha():
-#     for i in range(2):
-#         for j in range(2):
-#             if tabuleiro[i][j] != ' ':
-
 def imprimir_tabuleiro(tabuleiro):
     print('\033[0;94m  1   2   3\033[m')
     print()
@@ -65,18 +61,6 @@ def imprimir_tabuleiro(tabuleiro):
         print(f'{f'\033[0;94m{i+1}\033[m'} '  f'{tabuleiro[i][0]} | {tabuleiro[i][1]} | {tabuleiro[i][2]} ')
         if i < 2:
             print(' ---+---+---')
-
-
-
-
-
-
-
-
-
-
-
-
 
 def checar_casa_human(tabuleiro):
     linha_human = None
@@ -91,19 +75,6 @@ def checar_casa_human(tabuleiro):
         else:
             tabuleiro[linha_human][coluna_human] = 'X'
             break
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def validarinputcoluna():
     while True:
@@ -123,7 +94,6 @@ def validarinputlinha():
             break
     return linha_human
         
-
 def checarlinhah():
         linha_human = int(input('Escolha a linha para jogar: ')) -1 
         if linha_human > 2 or linha_human == -1:
@@ -132,8 +102,6 @@ def checarlinhah():
         else:
             return linha_human
 
-
-
 def checarcolunah():
         coluna_human = int(input('Escolha a coluna para jogar: ')) - 1
         if coluna_human > 2 or coluna_human == -1:
@@ -141,7 +109,6 @@ def checarcolunah():
             checarcolunah()
         else:
             return coluna_human
-
 
 def checarvalidh(linha_human, coluna_human):
     if tabuleiro[linha_human][coluna_human] == ' ':
@@ -163,68 +130,59 @@ def checar_casa_comp(tabuleiro):
             checar_casa_comp(tabuleiro=tabuleiro)
         break
 
-        
-
 # AVISAR AO PLAYER QUEM INICIOU A PARTIDA
 if sorteio == 1:
     print('O computador começou jogando')
 if sorteio == 2:
     print(f'O jogador {jogador} começou o jogo')
 
-while True:
-    imprimir_tabuleiro(tabuleiro=tabuleiro)
-    print(' ')
-    print('=*' * 40)
-    print(' ')
-    if sorteio == 1:
-        
-        checar_casa_comp(tabuleiro=tabuleiro)
-
-
+def main():
+    placar_O = 0
+    placar_X = 0
+    while True:
         imprimir_tabuleiro(tabuleiro=tabuleiro)
+        print(' ')
         print('=*' * 40)
         print(' ')
+        if sorteio == 1:
+            
+            checar_casa_comp(tabuleiro=tabuleiro)
+            if verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
+                placar_O += 1
+                print(f'Jogador: {placar_X} Computador: {placar_O}')
+                imprimir_tabuleiro(tabuleiro=tabuleiro)
+                break
+            imprimir_tabuleiro(tabuleiro=tabuleiro)
+            print('=*' * 40)
+            print(' ')
 
-        checar_casa_human(tabuleiro=tabuleiro)
-        
-        
+            checar_casa_human(tabuleiro=tabuleiro)
+            if verificar_horizontal() == 'X' or verificar_vertical() == 'X' or verificar_diagonal() == 'X':
+                placar_X += 1
+                print(f'Jogador: {placar_X} Computador: {placar_O}')
+                imprimir_tabuleiro(tabuleiro=tabuleiro)
+                break
 
-    elif sorteio == 2:
-        
-        checar_casa_human(tabuleiro=tabuleiro)
-        
+        elif sorteio == 2:
+            
+            checar_casa_human(tabuleiro=tabuleiro)
+            if verificar_horizontal() == 'X' or verificar_vertical() == 'X' or verificar_diagonal() == 'X':
+                placar_X += 1
+                print(f'Jogador: {placar_X} Computador: {placar_O}')
+                imprimir_tabuleiro(tabuleiro=tabuleiro)
+                break
+            
+            print('=*' * 40)
+            print(' ')
 
-        print('=*' * 40)
-        print(' ')
+            imprimir_tabuleiro(tabuleiro=tabuleiro)
+            print('=*' * 40)
+            print(' ')
 
-        imprimir_tabuleiro(tabuleiro=tabuleiro)
-        print('=*' * 40)
-        print(' ')
-
-        checar_casa_comp(tabuleiro=tabuleiro)
-
-        
-
-    if verificar_horizontal() == 'X' or verificar_vertical() == 'X' or verificar_diagonal() == 'X':
-        placar_X += 1
-        print(f'Jogador: {placar_X} Computador: {placar_O}')
-        imprimir_tabuleiro(tabuleiro=tabuleiro)
-        print('Obrigada por jogar!')
-        continuar = input('Deseja jogar novamente?')
-
-    elif verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
-        placar_O += 1
-        print(f'Jogador: {placar_X} Computador: {placar_O}')
-        imprimir_tabuleiro(tabuleiro=tabuleiro)
-        print('Obrigada por jogar!')
-
-
- 
-    # else:
-    #     if verificar_velha() == True:
-    #         print('Deu velha')
-    #         break
-# def escolher_jog(sorteio):
-#     if sorteio == 1:
-#         checar_casa_comp()
-#     else:
+            checar_casa_comp(tabuleiro=tabuleiro)
+            if verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
+                placar_O += 1
+                print(f'Jogador: {placar_X} Computador: {placar_O}')
+                imprimir_tabuleiro(tabuleiro=tabuleiro)
+                break
+main()
