@@ -136,7 +136,9 @@ if sorteio == 1:
 if sorteio == 2:
     print(f'O jogador {jogador} começou o jogo')
 
+
 def main():
+    jogadas = 0
     placar_O = 0
     placar_X = 0
     while True:
@@ -147,6 +149,7 @@ def main():
         if sorteio == 1:
             
             checar_casa_comp(tabuleiro=tabuleiro)
+            jogadas += 1
             if verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
                 placar_O += 1
                 print(f'Jogador: {placar_X} Computador: {placar_O}')
@@ -155,17 +158,22 @@ def main():
             imprimir_tabuleiro(tabuleiro=tabuleiro)
             print('=*' * 40)
             print(' ')
-
+            if jogadas > 8:
+                print('Deu velha')
+                break
             checar_casa_human(tabuleiro=tabuleiro)
+            jogadas += 1
             if verificar_horizontal() == 'X' or verificar_vertical() == 'X' or verificar_diagonal() == 'X':
                 placar_X += 1
                 print(f'Jogador: {placar_X} Computador: {placar_O}')
                 imprimir_tabuleiro(tabuleiro=tabuleiro)
                 break
+
 
         elif sorteio == 2:
             
             checar_casa_human(tabuleiro=tabuleiro)
+            jogadas += 1
             if verificar_horizontal() == 'X' or verificar_vertical() == 'X' or verificar_diagonal() == 'X':
                 placar_X += 1
                 print(f'Jogador: {placar_X} Computador: {placar_O}')
@@ -178,11 +186,15 @@ def main():
             imprimir_tabuleiro(tabuleiro=tabuleiro)
             print('=*' * 40)
             print(' ')
-
+            if jogadas > 8:
+                print('Deu velha')
+                break
             checar_casa_comp(tabuleiro=tabuleiro)
+            jogadas += 1
             if verificar_horizontal() == computador or verificar_vertical() == computador or verificar_diagonal() == computador:
                 placar_O += 1
                 print(f'Jogador: {placar_X} Computador: {placar_O}')
                 imprimir_tabuleiro(tabuleiro=tabuleiro)
                 break
+        
 main()
